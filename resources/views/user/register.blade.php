@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>買い物リスト</title>
-    </head>
-    <body>
+@extends('layout')
+
+{{-- メインコンテンツ --}}
+@section('contets')
         <h1>ユーザ登録</h1>
         @if ($errors->any())
             <div>
@@ -22,5 +18,4 @@
             パスワード(再度)：<input  name="password" type="password"><br>
             <button>登録する</button>
         </form>
-    </body>
-</html>
+@endsection

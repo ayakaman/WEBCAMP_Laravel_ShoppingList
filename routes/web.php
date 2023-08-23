@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ShoppingListController;
 
 
 /*
@@ -25,3 +26,8 @@ Route::prefix('/user')->group(function () {
     Route::get('/register', [UserController::class, 'index'])->name('front.user.register');
     Route::post('/register', [UserController::class, 'register'])->name('front.user.register.post');
 });
+
+//認可処理
+    Route::prefix('/shopping_list')->group(function () {
+        Route::get('/list', [ShoppingListController::class, 'list'])->name('front.list');
+    });
