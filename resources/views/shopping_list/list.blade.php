@@ -2,7 +2,7 @@
 
 {{-- メインコンテンツ --}}
 @section('contets')
-        <h1>「買うもの」の登録（未実装）</h1>
+        <h1>「買うもの」の登録</h1>
         @if ($errors->any())
             <div>
             @foreach ($errors->all() as $error)
@@ -10,12 +10,12 @@
             @endforeach
             </div>
         @endif
-        @if (session('front.user_register_success') == true)
+        @if (session('front.shoppinglist_register_success') == true)
             「買うもの」を登録しました！！<br>
         @endif
-        <form action="/login" method="post">
+        <form action="/shopping_list/register" method="post">
             @csrf
-            「買うもの」名:<input name="name" value="{{ old('name') }}"><br>
+            「買うもの」名:<input name="name"><br>
             <button>「買うもの」を登録する</button><br>
         </form>
         <h1>「買うもの」一覧（未実装）</h1>
