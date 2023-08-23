@@ -17,7 +17,14 @@ class ShoppingListController extends Controller
      */
     public function list()
     {
-        return view('shopping_list.list');
+        // 1Page辺りの表示アイテム数を設定
+        $per_page = 5;
+
+        $list = Shopping_listModel::where('user_id', Auth::id())->get();
+//$sql = Shopping_listModel::toSql();
+//echo "<pre>\n"; var_dump($sql, $list); exit;
+        return view('shopping_list.list', ['list' => $list]);
+
     }
 
     /**
