@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         return view('/user/register');
     }
-    
+
      /**
      * 入力受取
      */
