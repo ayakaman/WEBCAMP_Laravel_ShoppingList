@@ -16,6 +16,9 @@
         @if (session('front.shoppinglist_delete_success') == true)
             「買うもの」を削除しました！！<br>
         @endif
+        @if (session('front.shoppinglist_completed_success') == true)
+            「買うもの」を完了にしました！！<br>
+            @endif
         <form action="/shopping_list/register" method="post">
             @csrf
             「買うもの」名:<input name="name"><br>
@@ -31,7 +34,10 @@
         <tr>
             <td>{{ $shopping_list->created_at->format('Y/m/d') }}
             <td>{{ $shopping_list->name }}
-            <td><form action="./top.html"><button>完了</button></form>
+            <td><form action="{{ route('complete', ['shopping_list_id' => $shopping_list->id]) }}" method="post">
+                @csrf
+                <button onclick='return confirm("この「買うもの」を「完了」にします。よろしいですか？");'>完了</button>
+                </form>
             <td>
             <td><form action="{{ route('delete', ['shopping_list_id' => $shopping_list->id]) }}" method="post">
                 @csrf
