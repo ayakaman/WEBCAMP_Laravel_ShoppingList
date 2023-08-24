@@ -3,12 +3,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ShoppingListRegisterPostRequest;
-use App\Models\Shopping_list as Shopping_listModel;
 use App\Models\Completed_Shopping_list as Completed_Shopping_listModel;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 
 
 class ShoppingListController extends Controller
@@ -63,16 +59,15 @@ class ShoppingListController extends Controller
     public function delete(Request $request, $shopping_list_id)
     {
         // shopping_list_idのレコード取得
-          $shopping_list = $this->getShopping_listModel($shopping_list_id);
-          var_dump($shopping_list);
-/*        // タスクを削除する
-     if ($shopping_list !== null) {
+        $shopping_list = $this->getShopping_listModel($shopping_list_id);
+        // タスクを削除する
+        if ($shopping_list !== null) {
             $shopping_list->delete();
             $request->session()->flash('front.shoppinglist_delete_success', true);
         }
         // 一覧に遷移
         return redirect('/shopping_list/list');
-*/   }
+    }
 
      /**
      * タスクの完了

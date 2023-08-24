@@ -1,5 +1,8 @@
 @extends('layout')
 
+{{-- タイトル --}}
+@section('title')(一覧画面)@endsection
+
 {{-- メインコンテンツ --}}
 @section('contets')
         <h1>「買うもの」の登録</h1>
