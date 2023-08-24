@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('/shopping_list')->group(function () {
         Route::get('/list', [ShoppingListController::class, 'list'])->name('front.list');
         Route::post('/register', [ShoppingListController::class, 'register']);
+        Route::delete('/delete/{shopping_list_id}', [ShoppingListController::class, 'delete'])->whereNumber('shopping_list_id')->name('delete');
     });
     // ログアウト
     Route::get('/logout', [AuthController::class, 'logout']);

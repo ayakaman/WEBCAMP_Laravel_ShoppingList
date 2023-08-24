@@ -53,4 +53,20 @@ class ShoppingListController extends Controller
         //
         return redirect('/shopping_list/list');
     }
+
+     /**
+     * 削除処理
+     */
+    public function delete(Request $request, $shopping_list_id)
+    {
+        // shopping_list_idのレコード取得
+        $shopping_list = $this->getShopping_listModel($shopping_list_id);
+        // タスクを削除する
+        if ($shopping_list !== null) {
+            $shopping_list->delete();
+            $request->session()->flash('front.shoppinglist_delete_success', true);
+        }
+        // 一覧に遷移
+        return redirect('/shopping_list/list');
+    }
 }
