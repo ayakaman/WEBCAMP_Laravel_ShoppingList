@@ -6,10 +6,9 @@
 {{-- メインコンテンツ --}}
 @section('contets')
         <h1>購入済み「買うもの」一覧</h1>
-        <a href="/shopping_list/list">「買うもの」一覧に戻る</a><br>
+        <a href="/shopping_list/list">「買うもの」一覧</a><br>
         <table border="1">
         <tr>
-
             <th>「買うもの」名
             <th>購入日
 @foreach ($list as $shopping_list)
@@ -18,11 +17,12 @@
             <td>{{ $shopping_list->created_at->format('Y/m/d') }}
 @endforeach
         </table>
+
         <!-- ページネーション -->
         {{-- $list->links() --}}
         現在 {{ $list->currentPage() }} ページ目<br>
         @if ($list->onFirstPage() === false)
-        <a href="/shopping_list/list">最初のページ</a>
+        <a href="/completed_shopping_list/list">最初のページ</a>
         @else
         最初のページ
         @endif
