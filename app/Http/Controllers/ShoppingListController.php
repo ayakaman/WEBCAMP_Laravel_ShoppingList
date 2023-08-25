@@ -64,15 +64,18 @@ class ShoppingListController extends Controller
     {
         // shopping_list_idのレコード取得
           $shopping_list = $this->getShopping_listModel($shopping_list_id);
-          var_dump($shopping_list);
-/*        // タスクを削除する
-     if ($shopping_list !== null) {
+          //var_dump($shopping_list);
+
+        // タスクを削除する
+        if ($shopping_list !== null) {
             $shopping_list->delete();
             $request->session()->flash('front.shoppinglist_delete_success', true);
         }
+
         // 一覧に遷移
         return redirect('/shopping_list/list');
-*/   }
+
+    }
 
      /**
      * タスクの完了
@@ -89,18 +92,19 @@ class ShoppingListController extends Controller
                 throw new \Exception(''); // 不正によるトランザクション終了
             }
 
-            // shopping_lists側を削除
+            //$shopping_lists側の削除
             $shopping_list->delete();
 //var_dump($shopping_list->toArray()); exit;
 
-            // completed_shopping_lists側にinsert
-            $dask_datum = $shopping_list->toArray();
-            unset($dask_datum['created_at']);
-            $r = Completed_Shopping_listModel::create($dask_datum);
+            // completed_tasks側にinsert?
+/*            $dask_datum = $task->toArray();
+            $r = CompletedTaskModel::create($dask_datum);
             if ($r === null) {
                 // insertで失敗したのでトランザクション終了
                 throw new \Exception('');
+
             }
+*/
 
             // トランザクション終了
             DB::commit();
@@ -118,4 +122,26 @@ class ShoppingListController extends Controller
         // 一覧に遷移
         return redirect('/shopping_list/list');
     }
+
+     /**
+     * 単一タスクmodel取得
+     */
+     protected function getShopping_listModel($shopping_list_id)
+     {
+          //shopping_listk_idレコード取得
+         $shopping_list = Shopping_listModel::find($shopping_list_id);
+         if ($shopping_list === null) {
+             return null;
+         }
+
+         //本人以外タスクならNG
+         if ($shopping_list->user_id !== Auth::id()) {
+             return null;
+         }
+
+         //
+         return $shopping_list;
+     }
+
+
 }
