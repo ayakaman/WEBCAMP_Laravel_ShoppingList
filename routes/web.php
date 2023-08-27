@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ShoppingListController;
 use App\Http\Controllers\CompletedShoppingListController;
 
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +43,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/completed_shopping_list/list', [CompletedShoppingListController::class, 'list']);
     // ログアウト
     Route::get('/logout', [AuthController::class, 'logout']);
+});
+
+// 管理画面
+Route::prefix('/admin')->group(function () {
+    Route::get('', [AdminAuthController::class, 'index'])->name('admin.index');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login');
 });
