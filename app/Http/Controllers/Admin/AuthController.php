@@ -39,7 +39,7 @@ class AuthController extends Controller
 
         //
         $request->session()->regenerate();
-        return redirect()->intended('/admin/top');
+        return redirect('/admin/top');
 
     }
 
@@ -47,13 +47,11 @@ class AuthController extends Controller
      * ログアウト処理
      *
      */
-/*
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
         $request->session()->regenerateToken();
         $request->session()->regenerate();
-        return redirect('/');
+        return redirect(route('admin.index'));
     }
-*/
 }
