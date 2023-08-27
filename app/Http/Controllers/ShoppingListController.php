@@ -96,15 +96,12 @@ class ShoppingListController extends Controller
             $shopping_list->delete();
 //var_dump($shopping_list->toArray()); exit;
 
-            // completed_tasks側にinsert?
-/*            $dask_datum = $task->toArray();
-            $r = CompletedTaskModel::create($dask_datum);
+            //completed_shopping_list側にinsert
+            $r = Completed_Shopping_listModel::create($datum);
             if ($r === null) {
                 // insertで失敗したのでトランザクション終了
                 throw new \Exception('');
-
             }
-*/
 
             // トランザクション終了
             DB::commit();
