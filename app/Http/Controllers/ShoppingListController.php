@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShoppingListRegisterPostRequest;
 use App\Models\Shopping_list as Shopping_listModel;
-use App\Models\Completed_Shopping_list as Completed_Shopping_listModel;
+use App\Models\CompletedShoppingList as CompletedShoppingListModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -97,7 +97,7 @@ class ShoppingListController extends Controller
 //var_dump($shopping_list->toArray()); exit;
 
             //completed_shopping_list側にinsert
-            $r = Completed_Shopping_listModel::create($datum);
+            $r = CompletedShoppingListModel::create($datum);
             if ($r === null) {
                 // insertで失敗したのでトランザクション終了
                 throw new \Exception('');
@@ -139,6 +139,16 @@ class ShoppingListController extends Controller
          //
          return $shopping_list;
      }
+
+      /**
+      * 一覧用の Illuminate\Database\Eloquent\Builder インスタンス取得
+      */
+     protected function getListBuilder()
+     {
+         return Shopping_listModel::where('user_id', Auth::id())
+                         ->orderBy('created_at');
+     }
+
 
 
 }

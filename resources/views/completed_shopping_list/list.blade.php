@@ -6,7 +6,7 @@
 {{-- メインコンテンツ --}}
 @section('contets')
         <h1>購入済み「買うもの」一覧</h1>
-        <a href="/shopping_list/list">「買うもの」一覧</a><br>
+        <a href="/shopping_list/list">「買うもの」一覧に戻る</a><br>
         <table border="1">
         <tr>
             <th>「買うもの」名
