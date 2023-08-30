@@ -9,12 +9,13 @@ use App\Models\CompletedShoppingList as CompletedShoppingListModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
 class ShoppingListController extends Controller
 {
     /**
-     * トップページ を表示する
+     * 一覧ページ表示
      *
      * @return \Illuminate\View\View
      */
@@ -23,13 +24,14 @@ class ShoppingListController extends Controller
         // 1Page辺りの表示アイテム数を設定
         $per_page = 10;
 
-        $list = Shopping_listModel::where('user_id', Auth::id())
-                                  ->paginate($per_page);
-                                  //->get();
-//$sql = Shopping_listModel::toSql();
-//echo "<pre>\n"; var_dump($sql, $list); exit;
+        $list = $this->getListBuilder()
+                     ->paginate($per_page);
+/*
+$sql = $this->getListBuilder()
+         ->toSql();
+echo "<pre>\n"; var_dump($sql, $list); exit;
+*/
         return view('shopping_list.list', ['list' => $list]);
-
     }
 
     /**
@@ -97,23 +99,25 @@ class ShoppingListController extends Controller
 //var_dump($shopping_list->toArray()); exit;
 
             //completed_shopping_list側にinsert
-            $r = CompletedShoppingListModel::create($datum);
+            $dask_datum = $task->toArray();
+            unset($dask_datum['updated_at']);
+            $r = CompletedShoppingListModel::create($dask_datum);
             if ($r === null) {
-                // insertで失敗したのでトランザクション終了
-                throw new \Exception('');
+               throw new \Exception('');  // insertで失敗したのでトランザクション終了
             }
+echo '処理成功'; exit;
 
             // トランザクション終了
             DB::commit();
 
             //完了メッセージ
-            $request->session()->flash('front.shoppinglist_completed_success', true);
+            //$request->session()->flash('front.shoppinglist_completed_success', true);
         } catch(\Throwable $e) {
-//var_dump($e->getMessage()); exit;
+var_dump($e->getMessage()); exit;
             // トランザクション異常終了
             DB::rollBack();
             //失敗メッセージ
-            $request->session()->flash('front.shoppinglist_completed_failure', true);
+           // $request->session()->flash('front.shoppinglist_completed_failure', true);
         }
 
         // 一覧に遷移
