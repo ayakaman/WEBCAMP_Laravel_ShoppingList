@@ -98,7 +98,7 @@ echo "<pre>\n"; var_dump($sql, $list); exit;
 //var_dump($shopping_list->toArray()); exit;
 
             //completed_shopping_list側にinsert
-            $dask_datum = $task->toArray();
+            $dask_datum = $shopping_list->toArray();
             unset($dask_datum['updated_at']);
             $r = CompletedShoppingListModel::create($dask_datum);
             if ($r === null) {
