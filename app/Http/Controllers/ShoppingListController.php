@@ -9,7 +9,6 @@ use App\Models\CompletedShoppingList as CompletedShoppingListModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
 class ShoppingListController extends Controller
@@ -105,7 +104,7 @@ echo "<pre>\n"; var_dump($sql, $list); exit;
             if ($r === null) {
                throw new \Exception('');  // insertで失敗したのでトランザクション終了
             }
-echo '処理成功'; exit;
+//echo '処理成功'; exit;
 
             // トランザクション終了
             DB::commit();
