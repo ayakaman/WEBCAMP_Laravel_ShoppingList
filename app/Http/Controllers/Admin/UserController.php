@@ -24,8 +24,5 @@ class UserController extends Controller
 //echo "<pre>\n";
 //var_dump($list->toArray()); exit;
         return view('admin.user.list', ['users' => $list]);
-echo "<pre>\n";
-var_dump($list->toArray()); exit;
-        //return view('admin.user.list');
     }
 }
