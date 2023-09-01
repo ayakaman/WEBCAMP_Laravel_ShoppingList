@@ -14,8 +14,8 @@
             @csrf
             名前:<input name="name" type="name" value="{{ old('name') }}"><br>
             email：<input name="email" value="{{ old('email') }}"><br>
-            パスワード：<input  name="password" type="password"><br>
-            パスワード(再度)：<input  name="password" type="password"><br>
+            パスワード：<input  name="password" type="password" required><br>
+            パスワード(再度)：<input  name="password_confirmation" type="password" required><br>
             <button>登録する</button>
         </form>
 @endsection

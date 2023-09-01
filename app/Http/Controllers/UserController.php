@@ -28,12 +28,21 @@ class UserController extends Controller
         // validate済
 
         // データの取得
-        $datum = $request->validated();
-        $datum['password'] = Hash::make($datum['password']);
+        $request->validate([
+        'password' => ['required', 'confirmed', 'max:72'],
+        'password_confirmation' => ['required', 'max:72'],
+        ]);
+
+        $user = new User([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => Hash::make($request->input('password')), //パスワードハッシュ化
+        ]);
+
 
         //INSERT
         try {
-            $r = UserModel::create($datum);
+            $r = UserModel::create($user);
         } catch(\Throwable $e) {
             echo $e->getMessage();
             exit;
