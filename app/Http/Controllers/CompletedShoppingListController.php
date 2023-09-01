@@ -3,8 +3,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\CompletedShoppingList as CompletedShoppingListModel;
 use Illuminate\Support\Facades\Auth;
+use App\Models\CompletedShoppingList as CompletedShoppingListModel;
 
 
 class CompletedShoppingListController extends Controller
@@ -28,15 +28,17 @@ class CompletedShoppingListController extends Controller
     public function list()
     {
 
-
-        // 1Page辺りの表示アイテム数を設定
+        // Page
         $per_page = 10;
 
         $list = $this->getListBuilder()
                      ->paginate($per_page);
-                                  //->get();
-//$sql = Shopping_listModel::toSql();
-//echo "<pre>\n"; var_dump($sql, $list); exit;
-        return view('/completed_shopping_list.list', ['list' => $list]);
+/*
+$sql = $this->getListBuilder()
+             ->toSql();
+echo "<pre>\n"; var_dump($sql, $list); exit;
+var_dump($sql);
+*/
+        return view('completed_shopping_list.list', ['list' => $list]);
     }
 }

@@ -65,7 +65,6 @@ echo "<pre>\n"; var_dump($sql, $list); exit;
     {
         // shopping_list_idのレコード取得
           $shopping_list = $this->getShopping_listModel($shopping_list_id);
-          //var_dump($shopping_list);
 
         // タスクを削除する
         if ($shopping_list !== null) {
@@ -110,13 +109,13 @@ echo "<pre>\n"; var_dump($sql, $list); exit;
             DB::commit();
 
             //完了メッセージ
-            //$request->session()->flash('front.shoppinglist_completed_success', true);
+            $request->session()->flash('front.shoppinglist_completed_success', true);
         } catch(\Throwable $e) {
 var_dump($e->getMessage()); exit;
             // トランザクション異常終了
             DB::rollBack();
             //失敗メッセージ
-           // $request->session()->flash('front.shoppinglist_completed_failure', true);
+            $request->session()->flash('front.shoppinglist_completed_failure', true);
         }
 
         // 一覧に遷移
