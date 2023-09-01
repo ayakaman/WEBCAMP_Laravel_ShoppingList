@@ -1,5 +1,8 @@
 @extends('admin.layout')
 
+{{-- タイトル --}}
+@section('title')(ユーザ一覧画面)@endsection
+
 {{-- メインコンテンツ --}}
 @section('contets')
         <h1>ユーザ一覧</h1>
