@@ -13,4 +13,6 @@
             <td>{{ $user->id }}
             <td>{{ $user->name }}
             <td>{{ $user->task_num }}
+@endforeach
+        </table>
 @endsection

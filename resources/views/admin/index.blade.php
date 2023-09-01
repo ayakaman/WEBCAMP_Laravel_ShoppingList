@@ -1,7 +1,11 @@
-@extends('admin.layout')
-
-{{-- メインコンテンツ --}}
-@section('contets')
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>買い物リスト 管理画面 @yield('title')</title>
+    </head>
+    <body>
         <h1>管理画面 ログイン</h1>
         @if ($errors->any())
             <div>
@@ -16,4 +20,5 @@
             パスワード：<input  name="password" type="password"><br>
             <button>ログインする</button><br>
         </form>
-@endsection
+  </body>
+</html>
